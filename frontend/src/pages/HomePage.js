@@ -1,17 +1,21 @@
 import HomePageComponent from "./components/HomePageComponent";
 import { useSelector } from "react-redux";
-import axios from "axios";
+import axiosInstance from "../../axiosInstance";
 
 const getBestsellers = async () => {
-    const { data } = await axios.get("/api/products/bestsellers");
-    return data;
-}
+  const { data } = await axiosInstance.get("/api/products/bestsellers");
+  return data;
+};
 
 const HomePage = () => {
+  const { categories } = useSelector((state) => state.getCategories);
 
-    const { categories } = useSelector((state) => state.getCategories);
-
-  return <HomePageComponent categories={categories} getBestsellers={getBestsellers} />;
+  return (
+    <HomePageComponent
+      categories={categories}
+      getBestsellers={getBestsellers}
+    />
+  );
 };
 
 export default HomePage;

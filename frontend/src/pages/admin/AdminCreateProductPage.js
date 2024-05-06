@@ -1,15 +1,21 @@
 import CreateProductPageComponent from "./components/CreateProductPageComponent";
-import axios from "axios";
+import axiosInstance from "../../axiosInstance";
 import {
   uploadImagesApiRequest,
   uploadImagesCloudinaryApiRequest,
 } from "./utils/utils";
 import { useSelector } from "react-redux";
-import { newCategory,deleteCategory, saveAttributeToCatDoc } from "../../redux/actions/categoryActions";
+import {
+  newCategory,
+  deleteCategory,
+  saveAttributeToCatDoc,
+} from "../../redux/actions/categoryActions";
 import { useDispatch } from "react-redux";
 
 const createProductApiRequest = async (formInputs) => {
-  const { data } = await axios.post(`/api/products/admin`, { ...formInputs });
+  const { data } = await axiosInstance.post(`/api/products/admin`, {
+    ...formInputs,
+  });
   return data;
 };
 

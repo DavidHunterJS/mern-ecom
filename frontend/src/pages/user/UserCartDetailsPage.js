@@ -3,7 +3,7 @@ import UserCartDetailsPageComponent from "./components/UserCartDetailsPageCompon
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart, removeFromCart } from "../../redux/actions/cartActions";
 
-import axios from "axios";
+import axiosInstance from "../../axiosInstance";
 
 const UserCartDetailsPage = () => {
   const cartItems = useSelector((state) => state.cart.cartItems);
@@ -14,14 +14,18 @@ const UserCartDetailsPage = () => {
   const reduxDispatch = useDispatch();
 
   const getUser = async () => {
-    const { data } = await axios.get("/api/users/profile/" + userInfo._id);
+    const { data } = await axiosInstance.get(
+      "/api/users/profile/" + userInfo._id
+    );
     return data;
   };
 
   const createOrder = async (orderData) => {
-      const { data } = await axios.post("/api/orders", { ...orderData });
-      return data;
-  }
+    const { data } = await axiosInstance.post("/api/orders", {
+      ...orderData,
+    });
+    return data;
+  };
 
   return (
     <UserCartDetailsPageComponent
