@@ -1,6 +1,6 @@
 import * as actionTypes from "../constants/categoryConstants";
 
-import axiosInstance from "../../axiosInstance";
+import axios from "axios";
 
 export const getCategories = () => async (dispatch) => {
   const { data } = await axios.get("/api/categories");
@@ -12,7 +12,7 @@ export const getCategories = () => async (dispatch) => {
 
 export const saveAttributeToCatDoc =
   (key, val, categoryChoosen) => async (dispatch, getState) => {
-    const { data } = await axiosInstance.post("/api/categories/attr", {
+    const { data } = await axios.post("/api/categories/attr", {
       key,
       val,
       categoryChoosen,
@@ -27,7 +27,7 @@ export const saveAttributeToCatDoc =
 
 export const newCategory = (category) => async (dispatch, getState) => {
   const cat = getState().getCategories.categories;
-  const { data } = await axiosInstance.post("/api/categories", { category });
+  const { data } = await axios.post("/api/categories", { category });
   if (data.categoryCreated) {
     dispatch({
       type: actionTypes.INSERT_CATEGORY,
@@ -39,7 +39,7 @@ export const newCategory = (category) => async (dispatch, getState) => {
 export const deleteCategory = (category) => async (dispatch, getState) => {
   const cat = getState().getCategories.categories;
   const categories = cat.filter((item) => item.name !== category);
-  const { data } = await axiosInstance.delete(
+  const { data } = await axios.delete(
     "/api/categories/" + encodeURIComponent(category)
   );
   if (data.categoryDeleted) {

@@ -1,5 +1,5 @@
 import UserProfilePageComponent from "./components/UserProfilePageComponent";
-import axios from "axios";
+import axiosInstance from "../../axiosInstance";
 import { useSelector, useDispatch } from "react-redux";
 import { setReduxUserState } from "../../redux/actions/userActions";
 
@@ -14,7 +14,7 @@ const updateUserApiRequest = async (
   state,
   password
 ) => {
-  const { data } = await axios.put("/api/users/profile", {
+  const { data } = await axiosInstance.put("/api/users/profile", {
     name,
     lastName,
     phoneNumber,
@@ -29,7 +29,7 @@ const updateUserApiRequest = async (
 };
 
 const fetchUser = async (id) => {
-  const { data } = await axios.get("/api/users/profile/" + id);
+  const { data } = await axiosInstance.get("/api/users/profile/" + id);
   return data;
 };
 

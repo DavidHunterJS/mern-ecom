@@ -1,7 +1,7 @@
 import EditProductPageComponent from "./components/EditProductPageComponent";
 
 import { useSelector } from "react-redux";
-import axiosInstance from "../../axiosInstance";
+import axios from "axios";
 import { useDispatch } from "react-redux";
 import { saveAttributeToCatDoc } from "../../redux/actions/categoryActions";
 import {
@@ -10,14 +10,12 @@ import {
 } from "./utils/utils";
 
 const fetchProduct = async (productId) => {
-  const { data } = await axiosInstance.get(
-    `/api/products/get-one/${productId}`
-  );
+  const { data } = await axios.get(`/api/products/get-one/${productId}`);
   return data;
 };
 
 const updateProductApiRequest = async (productId, formInputs) => {
-  const { data } = await axiosInstance.put(`/api/products/admin/${productId}`, {
+  const { data } = await axios.put(`/api/products/admin/${productId}`, {
     ...formInputs,
   });
   return data;
@@ -32,11 +30,9 @@ const AdminEditProductPage = () => {
     let encoded = encodeURIComponent(imagePath);
     if (process.env.NODE_ENV !== "production") {
       // to do: change to !==
-      await axiosInstance.delete(
-        `/api/products/admin/image/${encoded}/${productId}`
-      );
+      await axios.delete(`/api/products/admin/image/${encoded}/${productId}`);
     } else {
-      await axiosInstance.delete(
+      await axios.delete(
         `/api/products/admin/image/${encoded}/${productId}?cloudinary=true`
       );
     }

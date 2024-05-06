@@ -1,13 +1,13 @@
 import EditUserPageComponent from "./components/EditUserPageComponent";
-import axiosInstance from "../../axiosInstance";
+import axios from "axios";
 
 const fetchUser = async (userId) => {
-  const { data } = await axiosInstance.get(`/api/users/${userId}`);
+  const { data } = await axios.get(`/api/users/${userId}`);
   return data;
 };
 
 const updateUserApiRequest = async (userId, name, lastName, email, isAdmin) => {
-  const { data } = await axiosInstance.put(`/api/users/${userId}`, {
+  const { data } = await axios.put(`/api/users/${userId}`, {
     name,
     lastName,
     email,

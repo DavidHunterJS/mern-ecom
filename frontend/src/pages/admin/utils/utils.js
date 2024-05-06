@@ -1,11 +1,11 @@
-import axiosInstance from "../../axiosInstance";
+import axios from "axios";
 
 export const uploadImagesApiRequest = async (images, productId) => {
   const formData = new FormData();
   Array.from(images).forEach((image) => {
     formData.append("images", image);
   });
-  const { data } = await axiosInstance.post(
+  const { data } = await axios.post(
     "/api/products/admin/upload?productId=" + productId,
     formData
   );
@@ -27,7 +27,7 @@ export const uploadImagesCloudinaryApiRequest = (images, productId) => {
         return response.json();
       })
       .then((data) => {
-        axiosInstance.post(
+        axios.post(
           "/api/products/admin/upload?cloudinary=true&productId=" + productId,
           data
         );

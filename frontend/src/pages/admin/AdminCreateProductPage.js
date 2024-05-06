@@ -1,5 +1,5 @@
 import CreateProductPageComponent from "./components/CreateProductPageComponent";
-import axiosInstance from "../../axiosInstance";
+import axios from "axios";
 import {
   uploadImagesApiRequest,
   uploadImagesCloudinaryApiRequest,
@@ -13,9 +13,7 @@ import {
 import { useDispatch } from "react-redux";
 
 const createProductApiRequest = async (formInputs) => {
-  const { data } = await axiosInstance.post(`/api/products/admin`, {
-    ...formInputs,
-  });
+  const { data } = await axios.post(`/api/products/admin`, { ...formInputs });
   return data;
 };
 

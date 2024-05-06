@@ -1,5 +1,5 @@
 import ProductListPageComponent from "./components/ProductListPageComponent";
-import axiosInstance from "../../axiosInstance";
+import axios from "axios";
 
 import { useSelector } from "react-redux";
 
@@ -50,7 +50,7 @@ const getProducts = async (
   const search = searchQuery ? `search/${searchQuery}/` : "";
   const category = categoryName ? `category/${categoryName}/` : "";
   const url = `/api/products/${category}${search}?pageNum=${pageNumParam}${filtersUrl}&sort=${sortOption}`;
-  const { data } = await axiosInstance.get(url);
+  const { data } = await axios.get(url);
   return data;
 };
 

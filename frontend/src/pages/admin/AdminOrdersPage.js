@@ -1,9 +1,9 @@
 import OrdersPageComponent from "./components/OrdersPageComponent";
 
-import axiosInstance from "../../axiosInstance";
+import axios from "axios";
 
 const getOrders = async () => {
-  const { data } = await axiosInstance.get("/api/orders/admin");
+  const { data } = await axios.get("/api/orders/admin");
   return data;
 };
 
